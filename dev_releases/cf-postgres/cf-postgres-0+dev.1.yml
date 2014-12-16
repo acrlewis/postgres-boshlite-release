@@ -1,0 +1,16 @@
+---
+packages:
+- name: postgresql
+  version: 6dd965bb7d6d0d29f3b450a1c0f4c1a7285a7316
+  sha1: a729711fcbcf9dd5a959fb67bbae85d79fa4c220
+  fingerprint: 6dd965bb7d6d0d29f3b450a1c0f4c1a7285a7316
+  dependencies: []
+jobs:
+- name: postgres-server
+  version: c4f723d863a217b84c57eb26e2ae4f5407d08aee
+  fingerprint: c4f723d863a217b84c57eb26e2ae4f5407d08aee
+  sha1: f53bee25adf422b1c0beb086173a655b19cb8a05
+commit_hash: 34136a2e
+uncommitted_changes: true
+name: cf-postgres
+version: 0+dev.1

@@ -1,0 +1,59 @@
+---
+name: postgres
+director_uuid: 7e25414d-2dfe-4a71-a28a-d09fd6c853f2 #replace with your director UUID
+release:
+  name: cf-postgres
+  version: latest
+
+compilation:
+  workers: 2
+  cloud_properties:
+    ram: 8192
+    disk: 8096
+    cpu: 4
+  network: default
+  reuse_compilation_vms: true
+
+update:
+  canaries: 1
+  canary_watch_time: 3000 - 180000
+  update_watch_time: 3000 - 180000
+  max_in_flight: 2
+  max_errors: 1
+
+networks:
+ - name: default
+   subnets:
+   - range: 10.244.5.0/24
+     static:
+     - 10.244.5.201
+     - 10.244.5.202
+     - 10.244.5.203
+     reserved:
+     - 10.244.5.1-10.244.5.200
+     cloud_properties:
+      name : PCF
+
+_pools:
+ - name: rp1
+   network: default
+   stemcell:
+    name: bosh-warden-boshlite-centos-go_agent
+    version: 2776
+   cloud_properties:
+    ram: 16500
+    disk: 4096
+    cpu: 2
+
+jobs:
+ - name: postgres-server
+   template: postgres-server
+   instances: 1
+   _pool: rp1
+   persistent_disk: 4096
+   properties:
+     host: 10.244.5.201
+   networks:
+   - name: default
+     static_ips:
+     - 10.244.5.201
