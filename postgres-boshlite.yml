@@ -34,12 +34,12 @@ networks:
      cloud_properties:
       name : PCF
 
-_pools:
+resource_pools:
  - name: rp1
    network: default
    stemcell:
     name: bosh-warden-boshlite-centos-go_agent
-    version: 2776
+    version: 389
    cloud_properties:
     ram: 16500
     disk: 4096
@@ -49,7 +49,7 @@ jobs:
  - name: postgres-server
    template: postgres-server
    instances: 1
-   _pool: rp1
+   resource_pool: rp1
    persistent_disk: 4096
    properties:
      host: 10.244.5.201
